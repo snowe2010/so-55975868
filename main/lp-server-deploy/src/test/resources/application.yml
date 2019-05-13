@@ -1,0 +1,168 @@
+server:
+  address: 0.0.0.0
+  port: 9000
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    consul:
+      enabled: false
+  jpa:
+    database-dialect: com.promontech.common.db.PromontechPostgreSQLDialect
+    format-sql: false
+    show-sql: false
+    ddl-auto: validate
+
+  loanapp-datasource:
+    defaultUsername: postgres
+    defaultPassword: password
+    jdbc-url: jdbc:postgresql://localhost:5432/aggregate
+
+    commonProperties:
+      platform: postgres
+      driverClassName: org.postgresql.Driver
+      max-active: 5
+      min-idle: 1
+      max-idle: 5
+      max-wait: 60000
+      initial-size: 2
+      remove-abandoned: true
+      test-while-idle: true
+      validationInterval: 60000
+      validationQuery: SELECT 1
+
+    clients:
+      - name: PFS
+        tenantId: 825c0a1a-c6be-4144-9f2a-1e356502fd83
+        password: password
+      - name: TMC
+        tenantId: 1ed862f8-c06c-4124-a5af-b70d528181d7
+        password: password
+      - name: Test Tenant
+        tenantId: 99999999-9999-9999-9999-999999999999
+        password: password
+      - name: Test Tenant - Smoke
+        tenantId: 77777777-9999-9999-9999-999999999999
+        password: password
+      - name: PERL
+        tenantId: d83b3de0-f561-477b-81b6-744b254ea95c
+        password: password
+      - name: LUXURY
+        tenantId: c4e52554-6b65-4d1e-afb5-e4afdbd3c0e6
+        password: password
+
+  axon-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbc-url: jdbc:postgresql://localhost:5432/eventstore
+    username: postgres
+    password: password
+    max-active: 5
+    min-idle: 1
+    max-idle: 5
+    max-wait: 60000
+    initial-size: 2
+    remove-abandoned: true
+    test-while-idle: true
+    validationInterval: 60000
+    validationQuery: SELECT 1
+
+  token-store-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbc-url: jdbc:postgresql://localhost:5432/aggregate
+    username: postgres
+    password: password
+    max-active: 5
+    min-idle: 1
+    max-idle: 5
+    max-wait: 60000
+    initial-size: 2
+    remove-abandoned: true
+    test-while-idle: true
+    validationInterval: 60000
+    validationQuery: SELECT 1
+
+  dictionary-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbc-url: jdbc:postgresql://localhost:5432/dd
+    username: postgres
+    password: password
+    max-active: 5
+    min-idle: 1
+    max-idle: 5
+    max-wait: 60000
+    initial-size: 2
+    remove-abandoned: true
+    test-while-idle: true
+    validationInterval: 60000
+    validationQuery: SELECT 1
+
+  keystore-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbc-url: jdbc:postgresql://localhost:5432/keystore
+    username: postgres
+    password: password
+    max-active: 5
+    min-idle: 1
+    max-idle: 5
+    max-wait: 60000
+    initial-size: 2
+    remove-abandoned: true
+    test-while-idle: true
+    validationInterval: 60000
+    validationQuery: SELECT 1
+
+  flyway:
+    enabled: false
+
+axon:
+  distributed:
+    enabled: false
+    load-factor: 100
+    spring-cloud:
+      fallback-url: /axon/command-routing-information
+  eventhandling:
+    processors:
+      viewProjectors:
+        mode: TRACKING
+        threadCount: 4
+        initialSegmentCount: 4
+        sequencingPolicy: loanTransactionSequencingPolicy
+  eventStorageEngine:
+    gapCleaningThreshold: ${AXON_EVENT_STORAGE_ENGINE_GAP_CLEANING_THRESHOLD:50}
+    gapTimeout: ${AXON_EVENT_STORAGE_ENGINE_GAP_TIMEOUT:120000}
+
+# Spring Actuator settings. Default all endpoints set to off, and endpoints are turned on specifically.
+management:
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    conditions:
+      enabled: true
+    beans:
+      enabled: true
+    configprops:
+      enabled: true
+    health:
+      enabled: true
+    metrics:
+      enabled: true
+    info:
+      enabled: true
+    mappings:
+      enabled: true
+  server:
+    servlet:
+      context-path: /actuator
+
+#Values for the Spring Actuator Info:
+info:
+  app:
+    artifact: '@project.artifactId@'
+    description: '@project.description@'
+    name: '@project.name@'
+    version: '@project.version@'

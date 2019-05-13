@@ -1,0 +1,88 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    database-dialect: com.datapublica.pg.dialect.H2JsonDialect
+    format-sql: false
+    show-sql: false
+    ddl-auto: create-drop
+  loanapp-datasource:
+    defaultUsername: sa
+    defaultPassword:
+    restrictedMaxPoolSize: 5
+
+    commonProperties:
+      platform: h2
+      driverClassName: org.h2.Driver
+      jdbcUrl: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE
+      maximum-pool-size: ${AGGREGATE_DB_MAX_ACTIVE:5}
+      minimum-idle: ${AGGREGATE_DB_MIN_IDLE:1}
+      validation-timeout: ${AGGREGATE_DB_VALIDATION_INTERVAL:60000}
+
+  h2:
+    console:
+      enabled: true
+  cloud:
+    consul:
+      enabled: false
+  flyway:
+    enabled: false
+  axon-datasource:
+    platform: h2
+    driverClassName: org.h2.Driver
+    jdbcUrl: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE
+    maximum-pool-size: ${AGGREGATE_DB_MAX_ACTIVE:5}
+    minimum-idle: ${AGGREGATE_DB_MIN_IDLE:1}
+    validation-timeout: ${AGGREGATE_DB_VALIDATION_INTERVAL:60000}
+    username: sa
+    password:
+
+  token-store-datasource:
+    platform: h2
+    driverClassName: org.h2.Driver
+    jdbcUrl: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE
+    maximum-pool-size: ${AGGREGATE_DB_MAX_ACTIVE:5}
+    minimum-idle: ${AGGREGATE_DB_MIN_IDLE:1}
+    validation-timeout: ${AGGREGATE_DB_VALIDATION_INTERVAL:60000}
+    username: sa
+    password:
+
+  dictionary-datasource:
+    platform: h2
+    driverClassName: org.h2.Driver
+    jdbcUrl: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE
+    maximum-pool-size: ${AGGREGATE_DB_MAX_ACTIVE:5}
+    minimum-idle: ${AGGREGATE_DB_MIN_IDLE:1}
+    validation-timeout: ${AGGREGATE_DB_VALIDATION_INTERVAL:60000}
+    username: sa
+    password:
+
+  keystore-datasource:
+    platform: h2
+    driverClassName: org.h2.Driver
+    jdbcUrl: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE
+    maximum-pool-size: ${AGGREGATE_DB_MAX_ACTIVE:5}
+    minimum-idle: ${AGGREGATE_DB_MIN_IDLE:1}
+    validation-timeout: ${AGGREGATE_DB_VALIDATION_INTERVAL:60000}
+    username: sa
+    password:
+
+
+  profiles:
+    active: integration-test
+promontech:
+  flyway:
+    enabled: false
+ENVIRONMENT: localhost
+logging:
+  level: 
+    org:
+      springframework: debug
+    com:
+      zaxxer:
+        hikari: debug
+
+axon:
+  metrics:
+    auto-configuration:
+      enabled: true

@@ -1,0 +1,110 @@
+server:
+  address: 0.0.0.0
+  port: 9000
+  ssl:
+    enabled: false
+    enabled-protocols: TLSv1.2
+    key-alias: localhost
+    key-store: keystore.p12
+    key-store-password: 123456
+    keyStoreType: PKCS12
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  flyway:
+    enabled: false
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        temp:
+          use_jdbc_metadata_defaults: false
+#    database-dialect: com.promontech.common.db.PromontechPostgreSQLDialect
+    format-sql: false
+    show-sql: false
+    ddl-auto: validate
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+
+  loanapp-datasource:
+    defaultUsername: postgres
+    defaultPassword: password
+    restrictedMaxPoolSize: 1
+    jdbc-url: jdbc:postgresql://localhost:5432/aggregate?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+
+    commonProperties:
+      platform: postgres
+      driverClassName: org.postgresql.Driver
+      jdbc-url: jdbc:postgresql://localhost:5432/aggregate?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+      maximum-pool-size: 5
+      minimum-idle: 1
+      validation-timeout: 60000
+      idle-timeout: 60000
+
+  flyway-eventstore-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:5432/eventstore?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+    username: postgres
+    password: password
+    maximum-pool-size: 5
+    minimum-idle: 1
+    validation-timeout: 60000
+
+  flyway-aggregate-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:5432/aggregate?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+    username: postgres
+    password: password
+    maximum-pool-size: 5
+    minimum-idle: 1
+    validation-timeout: 60000
+
+  axon-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:5432/eventstore?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+    username: postgres
+    password: password
+    maximum-pool-size: 5
+    minimum-idle: 1
+    validation-timeout: 60000
+
+  token-store-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:5432/aggregate?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+    maximum-pool-size: 5
+    minimum-idle: 1
+    validation-timeout: 60000
+    username: postgres
+    password: password
+
+  dictionary-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:5432/dd?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+    maximum-pool-size: 5
+    minimum-idle: 1
+    validation-timeout: 60000
+    username: postgres
+    password: password
+
+  keystore-datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://localhost:5432/keystore?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+    username: postgres
+    password: password
+    maximum-pool-size: 5
+    minimum-idle: 1
+    validation-timeout: 60000
+
+logging:
+  level:
+    org.springframework.web.servlet: ERROR

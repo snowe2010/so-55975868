@@ -1,0 +1,10 @@
+enableFeaturePreview("IMPROVED_POM_SUPPORT")
+rootProject.name = 'lp-server-root'
+
+include ':lp-server-common',
+        ':lp-server-loanapp-common',
+        ':lp-server-read',
+        ':lp-server-deploy'
+
+//includeBuild("../spring-boot-2-common")
+includeBuild("../spring-boot-2-data-mapping")

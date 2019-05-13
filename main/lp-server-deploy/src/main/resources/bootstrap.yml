@@ -1,0 +1,42 @@
+promontech:
+  cluster: ${PROMONTECH_CLUSTER_NAME}
+  environment: ${ENVIRONMENT}
+spring:
+  application:
+    name: lp-server
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        watch:
+          wait-time: 10
+          enabled: true
+      enabled: true
+      discovery:
+        enabled: ${CONSUL_DISCOVERY_ENABLED:false}
+        service-name: lp-server
+        heartbeat:
+          enabled: true
+    vault:
+      enabled: false
+      consul:
+        enabled: false
+      discovery:
+        enabled: false
+      generic:
+        enabled: false
+
+      rabbitmq:
+        enabled: true
+        role: ${promontech.cluster}-${spring.application.name}
+        backend:  platform_rabbitmq
+        username-property: spring.rabbitmq.username
+        password-property: spring.rabbitmq.password
+
+      uri: https://vault.${promontech.environment}.promontech.com
+      fail-fast: true
+      token: ${VAULT_TOKEN}
+      authentication: TOKEN #default
+      port: 8200

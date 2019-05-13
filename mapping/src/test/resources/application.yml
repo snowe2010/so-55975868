@@ -1,0 +1,39 @@
+
+logging:
+  level:
+    root: WARN
+    org.springframework: WARN
+    com.promontech: DEBUG
+    org.quartz: WARN
+
+spring:
+
+  jpa:
+    database: POSTGRESQL
+    databaseDriver: org.postgresql.Driver
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    hibernate:
+      database-dialect: com.promontech.loanapp.config.CustomPostgreSQL94Dialect
+      # allowed values true|false
+      format-sql: false
+      # allowed values true|false
+      show-sql: false
+      ddl-auto: update
+
+  datasource:
+    dictionary:
+      platform: postgres
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://${DD_POSTGRES_URL:localhost}:${DD_POSTGRES_PORT:5432}/${DD_POSTGRES_DB:dd}?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+      username: ${DD_POSTGRES_USER:postgres}
+      password: ${DD_POSTGRES_PW:}
+      dbcp:
+        max-active: 5
+        initial-size: 3
+        remove-abandoned: true
+        validationInterval: 30000
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+

@@ -1,0 +1,11 @@
+VAULT_TOKEN: token
+ENVIRONMENT: environment
+PROMONTECH_CLUSTER_NAME: whitefall
+spring:
+  cloud:
+    consul:
+      enabled: false
+    vault:
+      enabled: false
+      consul:
+        enabled: false
