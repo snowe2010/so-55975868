@@ -7,4 +7,4 @@ include ':lp-server-common',
         ':lp-server-deploy'
 
 //includeBuild("../spring-boot-2-common")
-includeBuild("../spring-boot-2-data-mapping")
+includeBuild("../mapping")
