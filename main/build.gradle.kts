@@ -25,8 +25,12 @@ description = "Loan Platform Server :: Root"
 allprojects {
     group = "com.promontech.loanplatform"
     repositories {
+        jcenter {
+            content {
+                excludeGroup("com.datapublica.pg")
+            }
+        }
         mavenLocal()
-        jcenter()
     }
     ext {
         set("springBootVersion", springBootVersion)
