@@ -2,9 +2,9 @@ plugins {
     base
     java
     idea
-    kotlin("jvm") version "1.2.51"
-    kotlin("plugin.jpa") version ("1.2.51")
-    kotlin("plugin.spring") version ("1.2.51")
+    kotlin("jvm") version "1.2.71"
+    kotlin("plugin.jpa") version ("1.2.71")
+    kotlin("plugin.spring") version ("1.2.71")
     id("com.vanniktech.dependency.graph.generator") version ("0.5.0")
     id("org.flywaydb.flyway") version ("5.2.1")
 }
@@ -51,7 +51,6 @@ allprojects {
         implementation(platform("org.springframework.cloud:spring-cloud-dependencies:${extra["springCloudVersion"]}"))
         implementation(platform("org.springframework.cloud:spring-cloud-vault-dependencies:${extra["springCloudVaultVersion"]}"))
         implementation(platform("org.springframework.data:spring-data-releasetrain:${extra["springDataVersion"]}"))
-        implementation(platform("org.springframework:spring-framework-bom:${extra["springBootVersion"]}"))
         
         // TODO only for spring boot 2 migration
         runtime("org.springframework.boot:spring-boot-properties-migrator:${extra["springBootVersion"]}")
@@ -100,3 +99,7 @@ subprojects {
 dependencies {
     implementation(kotlin(module = "stdlib-jdk8"))
 }
+
+// configurations.all {
+    // resolutionStrategy.failOnVersionConflict()
+// }
