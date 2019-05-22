@@ -24,7 +24,10 @@ description = "Loan Platform Server :: Root"
 
 allprojects {
     group = "com.promontech.loanplatform"
-
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
     ext {
         set("springBootVersion", springBootVersion)
         set("springDataVersion", springDataVersion)
@@ -61,7 +64,6 @@ allprojects {
 
         implementation(platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}"))
         implementation("org.apache.pdfbox:pdfbox:2.0.4")
-        implementation("io.axoniq:axoniq-gdpr-axon3:1.0.5")
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
